@@ -1,0 +1,41 @@
+1)	Analise o cenário de negócio do tema de projeto escolhido pelo seu grupo
+
+Cenário de negócio -> A&SSneakers tem o objetivo de facilitar a comunicação entre lavanderias especializadas e o cliente que deseja cuidar de seu acessório e/ou tênis.
+
+2) Definir as fronteiras do negócio a ser modelado.
+•	Definir quem e o quê pode ter interação com o negócio
+
+3) Liste as atividades de negócio
+Cliente
+•	Faz o cadastro na plataforma, informando dados pessoais, financeiros e de residência;
+•	Busca por lavanderias especializadas próximas a área de residência;
+•	Informa os objetos a serem tratados pela Lavanderia;
+•	Informa data e forma de entrega/retirada do objeto após lavagem;
+•	Solicita um orçamento;
+•	Realiza um agendamento juntamente à Lavanderia;
+•	Consulta informações do seu agendamento;
+•	Solicita o cancelamento ou alteração do agendamento;
+•	Faz o pagamento;
+•	Modifica informações de perfil.
+•	Avalia o serviço.
+Lavanderia
+•	Faz o cadastro na plataforma, informando dados, financeiros e de localidade;
+•	Informa suas especialidades.
+•	Administra o processo de lavagem/higienização dos objetos entregues pelo cliente.
+•	Registra o estado do objeto pré e pós tratamento;
+•	Atribui funcionários a um determinado agendamento;
+•	Oferece Entrega a domicílio
+•	Altera o funcionário para determinado agendamento; 
+•	Consulta informações de todos os agendamentos;
+•	Avalia cliente
+•	Modifica informações de perfil.
+A&S Clean
+•	Notifica ambas as partes durante o processo;
+•	Avalia cadastro das lavanderias;
+•	Valida informações do cliente;
+•	Oferece suporte às partes durante o processo;
+•	Oferece garantia contra potenciais danos aos objetos do cliente.
+
+4) Identifique as informações de entrada e saída de cada atividade de negócio
+Faça um modelo que represente o Fluxo das Atividades de Negócio entre os envolvidos
+Você conhece algum diagrama que te ajude a fazer isso? Fluxo no PowerPoint? Fluxograma, Diagrama de Atividades, BPMN?
