@@ -1,0 +1,449 @@
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\usepackage[portuguese]{babel}
+\geometry{a4paper} 
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+\usepackage{xcolor}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 01 - Transformações Geométricas}
+\end{center}
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+Seja um ponto \emph{P=(2, -1, 3)} no espaço euclidiano 3D. Para deslocá-lo 20 unidades na direção X, 5 unidades em Y e 4 unidades em Z, qual a matriz de trasnformação que devo multiplicar P? Apresente a Matriz e o resultado final separadamente.\\
+\\
+\noindent\textbf{Solução:}
+\[
+\text{Matriz que deve multiplicar P:}
+	\begin{bmatrix}
+        1 & 0 & 0 & 20\\
+        0 & 1 & 0 & 5\\
+        0 & 0 & 1 & 4\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[  
+\text{Resultado final:}
+	\begin{bmatrix}
+        22\\
+        4\\
+        7\\
+        1
+    \end{bmatrix}
+\]
+
+
+\vspace{1 cm}
+\noindent\textbf{Questão 02:}\\
+Considerando o mesmo ponto P da questão 1, qual matriz devo aplicar a P para que ele se desloque para o ponto \emph{P=(1,6,4)}?\\
+\\
+\noindent\textbf{Solução:}
+\[
+\text{Matriz que deve ser aplicada à P:}
+	\begin{bmatrix}
+        1 & 0 & 0 & -1\\
+        0 & 1 & 0 & 7\\
+        0 & 0 & 1 & 1\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1 cm}
+\noindent\textbf{Questão 03:}\\
+Supondo ainda o mesmo ponto \emph{P} da 1º questão, qual a única matriz que devo aplicar a P, para que ele sofra ao mesmo tempo uma rotação de 25º em torno do centro do sistema de coordenadas, seguido de uma translação.\\
+\\
+\noindent\textbf{Solução:}
+\\
+$$ T \cdot R = P \rightarrow T \cdot R = M \therefore M \cdot P $$
+\\
+\[
+\text{Matriz que deve ser aplicada à P:}
+	\begin{bmatrix}
+        0.906 & -0.423 & 0 & 20\\
+        0.423 & 0.906 & 0 & 5\\
+        0 & 0 & 1 & 4\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 04:}\\
+Seja uma nuvem de pontos no espaço Euclidiano 3D,\emph{P = (2, -1, 1),( 1, 1, 1), (3, 2, 1),( 2, 4, 2),
+(1, 0, 2),( 2, 1, 3),( 3, 1, 1), (4, 2, -3),(3, 5, 5), (2, 3, 5)}. Para rotacionar essa nuvem de 75º no eixo X, 45º no eixo Y e 60º no eixo Z, sempre em torno do seu centro de massa, qual a matriz que devo aplicar sobre a nuvem P?\\
+\\
+\noindent\textbf{Solução:}
+\\
+$$ M =  T \cdot R_x \cdot R_y \cdot R_z \cdot T' \cdot N$$
+\\
+\[
+\text{M = }
+	\begin{bmatrix}
+	    0.354 & -0.566 & 0.745 & 0.124\\
+        0.612 & -0.462 & -0.641 & 1.80\\
+        0.707 &  0.683 & 0.183 & -0.198\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 05:}\\
+Seja a Figura 1 a seguir no plano \emph{x-y}, cujas coordenadas de apenas quatro pontos \emph{(P 1, P 2, P 3 e P 4)}
+sao conhecidas. Sabemos que o centro de gravidade da figura coincide com o centro do sistema
+de coordenadas \emph{(0, 0)}. Considere \emph{P1 = (11, 8), P2 = (15, -10), P3 = ( -8, -8), P4 = (-14, 9)}.
+Responda:
+\begin{itemize}
+\item \textbf{(a)} Qual a matriz que provoca um contração por igual de 10\% no desenho?
+\item \textbf{(b)} Qual a matriz que provoca uma contração de 10\% na dimensão x e 15\% na dimensão y?
+\item \textbf{(c)} Quais os valores finais de \emph{P1, P2, P3 e P4}, após a aplicação do item (b)?
+\item \textbf{(d)} Se o valor final de \emph{P1}, após uma expansão foi \emph{P1'= (30, 12)}, qual o valor de \emph{P3}?
+\item \textbf{(e)} Se o desenho foi primeiro rotacionado de 65º no eixo x, seguido de uma expansão por igual de 50\% no mesmo eixo, qual é a matriz de transformação que substitui as duas operações?
+\item \textbf{(f)} Qual a matriz que causará uma reflexão do desenho em torno do ponto de origem? Quais os
+valores finais dessa reflexão para cada ponto \emph{P1, P2, P3 e P4}?
+\end{itemize}
+\\
+\\
+\noindent\textbf{Solução:}
+\\
+\begin{itemize}
+\item\textbf{(a)} 
+\text{Matriz que provoca uma contração de 10\% no desenho:}
+\[  T = 
+	\begin{bmatrix}
+	0.9 & 0 & 0 & 0\\
+    0 & 0.9 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\item\textbf{(b)} 
+\text{Matriz que provoca uma contração de 10\% na dimensão x e 15\% na dimensão y:}
+\[  M = 
+	\begin{bmatrix}
+	0.9 & 0 & 0 & 0\\
+    0 & 0.85 & 0 & 0\\
+    0 & 0 & 1 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\item\textbf{(c)} 
+\text{Após a aplicação do item \emph{b}, os valores finais de \emph{P1, P2, P3 e P4} serão:}
+\[\text\emph{P_1=(9.9, 6.8)}\]
+\[\text\emph{P_2=(13.5, -8.5)}\]
+\[\text\emph{P_3=(-7.2, 6.8)}\]
+\[\text\emph{P_4=(-12.6, 7.65)}
+\]
+\\
+\item\textbf{(d)} 
+\text{O valor final de \emph{P3} é: }
+\[\text\emph{P_3=(-21.6, -12)}\]
+\\
+\item\textbf{(e)} 
+\text{A Matriz que substitui as duas operações é:}
+\[  M = 
+	\begin{bmatrix}
+	1.5 & 0 & 0 & 0\\
+    0 & 0.423 & -0.906 & 0\\
+    0 & 0.906 & 0.423 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\item\textbf{(f)} 
+\text{A Matriz que causará uma reflexão no desenho em torno do ponto de origem é:}
+\[  P = 
+	\begin{bmatrix}
+	-1 & 0 & 0 & 0\\
+    0 & -1 & 0 & 0\\
+    0 & 0 & -1 & 0\\
+    0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\text{Os valores finais dessa reflexão em cada ponto são:}
+\[\text\emph{P_1=(-11, -8) }\]
+\[\text\emph{P_2=(-15, 10) }\]
+\[\text\emph{P_3=(8, 8) }\]
+\[\text\emph{P_4=(14, -9) }\]
+\end{itemize}
+\vspace{1cm}
+\noindent\textbf{Questão 06:}\\
+Mostre que a composição (concatenação) de duas rotações $\Theta$1 e $\Theta$2 é aditiva, ou seja: \emph{R($\Theta$1)R($\Theta$2) = R($\Theta$1 + $\Theta$2)}.\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[
+	\begin{bmatrix}
+        \cos{$\theta$_1} & -\sin{$\theta$_1} & 0 & 0\\
+        \sin{$\theta$_1} & \cos{$\theta$_1} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \cdot  
+    \begin{bmatrix}
+        \cos{$\theta$_2} & -\sin{$\theta$_2} & 0 & 0\\
+        \sin{$\theta$_2} & \cos{$\theta$_2} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        \cos{$\theta$_1 + $\theta$_2} & -\sin{$\theta$_1 + $\theta$_2} & 0 & 0\\
+        \sin{$\theta$_1 + $\theta$_2} & \cos{$\theta$_1 + $\theta$_2} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 07:}\\
+Prove que a multiplicação de duas matrizes de translação aplicadas sucessivamente é comutativa.\\
+\\
+\noindent\textbf{Solução:}
+\[
+    M_1 =
+	\begin{bmatrix}
+        1 & 0 & 0 & \emph{a}\\
+        0 & 1 & 0 & \emph{b}\\
+        0 & 0 & 1 & \emph{c}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \cdot  
+    \begin{bmatrix}
+        1 & 0 & 0 & \emph{x}\\
+        0 & 1 & 0 & \emph{y}\\
+        0 & 0 & 1 & \emph{z}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1 & 0 & 0 & \emph{a+x}\\
+        0 & 1 & 0 & \emph{b+y}\\
+        0 & 0 & 1 & \emph{c+z}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\[
+    M_2 =
+	\begin{bmatrix}
+        1 & 0 & 0 & \emph{x}\\
+        0 & 1 & 0 & \emph{y}\\
+        0 & 0 & 1 & \emph{z}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \cdot  
+    \begin{bmatrix}
+        1 & 0 & 0 & \emph{a}\\
+        0 & 1 & 0 & \emph{b}\\
+        0 & 0 & 1 & \emph{c}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1 & 0 & 0 & \emph{x+a}\\
+        0 & 1 & 0 & \emph{y+b}\\
+        0 & 0 & 1 & \emph{z+c}\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 08:}\\
+Mostre que uma rotação R no eixo Z e um escalonamento S no plano \emph{(x, y)} são comutativos
+apenas se o escalonamento for uniforme.\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[
+    M_1 =
+    \begin{bmatrix}
+        \cos{$\theta$_1} & -\sin{$\theta$_1} & 0 & 0\\
+        \sin{$\theta$_1} & \cos{$\theta$_1} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \cdot  
+    \begin{bmatrix}
+        a & 0 & 0 & 0\\
+        0 & b & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        a\cdot\cos{$\theta$_1} & b\cdot-\sin{$\theta$_1} & 0 & 0\\
+        a\cdot\sin{$\theta$_1} & b\cdot\cos{$\theta$_1} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[
+    M_2 =
+    \begin{bmatrix}
+        a & 0 & 0 & 0\\
+        0 & b & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+        \cos{$\theta$_1} & -\sin{$\theta$_1} & 0 & 0\\
+        \sin{$\theta$_1} & \cos{$\theta$_1} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        a\cdot\cos{$\theta$_1} & a\cdot-\sin{$\theta$_1} & 0 & 0\\
+        b\cdot\sin{$\theta$_1} & b\cdot\cos{$\theta$_1} & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[
+    \text{ Logo, $M_1=M_2$ apenas se o escalonamento for uniforme.}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 09:}\\
+Qual a razão de se adotar coordenadas homogêneas em computação gráfica ?\\
+\\
+\noindent\textbf{Solução:}
+\\
+O uso de Coordenadas Homogêneas em computação Gráfica tem o objetivo de agilizar 
+o cálculo  de transformações, permitindo assim, representar tudo da mesma forma.
+
+\vspace{1cm}
+\noindent\textbf{Questão 10:}\\
+Seja a transformação abaixo na Figura 1, cujos pontos iniciais e finais são indicados por setas,
+dada por uma matriz de escalonamento. Mostre essa matriz.\\
+\\
+\noindent\textbf{Solução:}
+\\
+
+\text{Matriz de escalonamento do eixo x:}
+\[
+  M_1 = 
+  \begin{bmatrix}
+        3 & 0 & 0 & 0\\
+        0 & 1 & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+
+\vspace{1cm}
+\noindent\textbf{Questão 11:}\\
+Se considerarmos o ponto \emph{P = (A + B)/2} como o centro de rotação, como faríamos para
+representar a rotação de θ graus no sentido anti-horário dos objetos A e B em torno de P e ao
+mesmo tempo em torno de seus próprios centros de massa, também de θ graus ?\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[ 
+    TP' = 
+	\begin{bmatrix}
+        1 & 0 & 0 & -$\Delta$$x_p$\\
+        0 & 1 & 0 & -$\Delta$$y_p$\\
+        0 & 0 & 1 & -$\Delta$$z_p$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    ""
+    R_\theta = 
+    \begin{bmatrix}
+        1 & 0 & 0 & 0\\
+        0 & $\cos{\theta}$ & $-\sin{\theta}$ & 0\\
+        0 & $\sin{\theta}$ & $\cos{\theta}$ & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[ 
+    TP = 
+	\begin{bmatrix}
+        1 & 0 & 0 & $\Delta$$x_p$\\
+        0 & 1 & 0 & $\Delta$$y_p$\\
+        0 & 0 & 1 & $\Delta$$z_p$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    ""
+    TB' = 
+    \begin{bmatrix}
+        1 & 0 & 0 & -$\Delta$$x_b$\\
+        0 & 1 & 0 & -$\Delta$$y_b$\\
+        0 & 0 & 1 & -$\Delta$$z_b$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[ 
+    TB = 
+	\begin{bmatrix}
+        1 & 0 & 0 & $\Delta$$x_b$\\
+        0 & 1 & 0 & $\Delta$$y_b$\\
+        0 & 0 & 1 & $\Delta$$z_b$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+    ""
+    TA' = 
+    \begin{bmatrix}
+        1 & 0 & 0 & -$\Delta$$x_a$\\
+        0 & 1 & 0 & -$\Delta$$y_a$\\
+        0 & 0 & 1 & -$\Delta$$z_a$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+\[ 
+    TA = 
+	\begin{bmatrix}
+        1 & 0 & 0 & $\Delta$$x_a$\\
+        0 & 1 & 0 & $\Delta$$y_a$\\
+        0 & 0 & 1 & $\Delta$$z_a$\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\\
+$$M_1 = TB \cdot R\theta \cdot TB' \cdot TP \cdot R\theta \cdot TP'$$
+$$M_2 = TA \cdot R\theta \cdot TA' \cdot TP \cdot R\theta \cdot TP'$$
+
+\vspace{1cm}
+\noindent\textbf{Questão 12:}\\
+Existe um objeto 2D no plano \emph{x-y} e cujo centro de massa está localizado no ponto \emph{(0, 0)}, sendo
+observado por uma câmera localizada no ponto \emph{P1=(x1, y1)}. Qual a matriz de transformação da
+câmera que fará com que ela mova-se no plano \emph{x-y} para o ponto \emph{P2=(x2, y2)} que está diametralmente oposto ao ponto P1?\\
+\\
+\noindent\textbf{Solução:}
+\\
+
+\text{Matriz de transformação:}
+\[
+  M_1 = 
+  \begin{bmatrix}
+        -1 & 0 & 0 & 0\\
+        0 & -1 & 0 & 0\\
+        0 & 0 & 1 & 0\\
+        0 & 0 & 0 & 1
+    \end{bmatrix}
+\]
+\end{document}
+
