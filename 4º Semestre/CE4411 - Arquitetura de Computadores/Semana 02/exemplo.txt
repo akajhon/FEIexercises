@@ -1,0 +1,60 @@
+**************** ANOTACOES *********************
+MOV R0, #30
+MOV R1, #20
+MOV A, R0
+ADD A, R1
+MOV R7, A
+**************
+MOV R0, #100
+MOV R1, #200
+MOV A, R0
+ADD A, R1
+MOV R7, A
+**************
+2)
+
+A) MOV PSW, #00001000B ;o"b" é pq é um número em binário
+B) MOV R0, #0FFH
+   MOV R1, #0FFH
+   MOV R2, #0FFH
+   MOV R3, #0FFH
+   MOV R4, #0FFH
+   MOV R5, #0FFH
+   MOV R6, #0FFH
+   MOV R7, #0FFH
+
+C) MOV PSW, #00011000B ;o"b" é pq é um número em binário
+D) MOV R0, #0AAH
+   MOV R1, #0AAH
+   MOV R2, #0AAH
+   MOV R3, #0AAH    
+   MOV R4, #0AAH
+   MOV R5, #0AAH
+   MOV R6, #0AAH
+   MOV R7, #0AAH
+
+E) MOV PSW, #00001100B ;o"b" é pq é um número em binário
+F) MOV R0, #0BBH
+   MOV R1, #0BBH
+   MOV R2, #0BBH
+   MOV R3, #0BBH    
+   MOV R4, #0BBH
+   MOV R5, #0BBH
+   MOV R6, #0BBH
+   MOV R7, #0BBH
+
+*********************************
+3) Instrução ** Byte 1 ** Byte 2
+   ADD A, R0 ->   28        -
+   ADD A, R1 ->   29        -
+   ADD A, R7 ->   2F        -
+   ADD A,@R0 ->   26        -
+   ADD A,@R1 ->   27        -
+   ADD A,#43H ->  24       43
+   ADD A, 43H ->  25       43
+**********************************
+4) Instrução ** opcode
+   MOV A, R1 ->  E9
+   ADD A, RO ->  28
+   MOV R7, A ->  FF
+**********************************

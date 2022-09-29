@@ -1,0 +1,75 @@
+*********************************************
+** Laboratório Arquitetura de Computadores **
+** Aula 01                                 ** 
+** Aluno: João Pedro Rosa Cezarino         **
+** R.A: 22.120.021-5                       **
+*********************************************
+
+Exercício 1:
+
+A) MOV R1, #20H
+
+B) MOV A, R1
+
+C) MOV 40H, #30H
+
+D) MOV A, R3
+     MOV R1, A
+	
+E) INC R3
+
+F) DEC 40H
+
+G) MOV A, #0
+
+Exercício 2:
+
+ MOV A, #64H
+ ADD A, R1
+ MOV A, R1
+ ADD A, R2
+ MOV R1, A
+ INC R2
+ ADD A, R2
+ ADD A, @R1
+ 
+Exercício 3:
+
+1) A = 00
+2) 10H = 02
+3) 11H = 0A
+4) 12H = 10
+5) R0 = 10
+6) A = 0X10
+7) A = 0X12
+8) R0 = 11
+9) A = 0X23
+10) A = 0X2D
+11) R0 = 12
+12) A = 0X3F
+13) A = 0X4F
+
+Exercício 4:
+
+A) ADD A, R1
+
+B) MOV A, R0
+     ADD A, R1
+     
+C) MOV A, R0
+     INC A
+     
+D) DEC R0
+     MOV A, R0
+     
+E) MOV A, RO
+     ADD A, R1
+     MOV R2, A
+     
+F) MOV A, @R0
+     ADD A, @R1
+     MOV R2, A
+     
+Exercício 5:
+ 
+ Um microprocessador é um circuito integrado responsável pelo processamento de dados, como uma unidade lógica e aritmética, com diversos registradores especiais, porém, precisa receber ordens externas e ter outros componentes externos para funcionar. Já o microcontrolador é um microprocessador, porém, opera em conjunto com uma memória RAM, memória ROM, temporizadores, contadores, porta serial, conversores e etc, em um só circuito integrado.

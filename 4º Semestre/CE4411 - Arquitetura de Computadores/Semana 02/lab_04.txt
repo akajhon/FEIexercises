@@ -1,0 +1,134 @@
+*********************************************
+** Laboratório Arquitetura de Computadores **
+** Aluno: João Pedro Rosa Cezarino         **
+** R.A: 22.120.021-5                       **
+*********************************************
+
+Exercício 1:
+
+0000| MOV R1, #250
+0002| MOV R0, #10
+0004| MOV A, R1
+0005| ADD A, R0
+0006| MOV R7, A
+
+Exercício 2:
+
+Instrução  | Opcode
+MOV A, R1  ->  E9
+ADD A, R0  ->  28
+MOV R7, A  ->  F15
+
+Exercício 3:
+
+0000| MOV R0, #92
+0002| MOV R1, #72
+0004| MOV A, R0
+0005| MOV B, R1
+0007| MUL AB
+0008| MOV R6,A
+0009| MOV R7, B
+
+Exercício 4:
+
+Instrução  | Opcode
+MOV A, R0  ->  E8
+MOV B, R1  ->  89
+MUL AB     ->  A4
+MOV R6,A   ->  F14
+MOV R7, B  ->  A15
+
+Exercício 5:
+
+0000| MOV R1, #11
+0002| MOV R0, #3
+0004| MOV A, R1
+0005| MOV B, R0
+0007| DIV AB
+0008| MOV R7, A
+0009| MOV R6, B
+       
+Exercício 6:
+
+Instrução  | Opcode
+MOV A, R1  ->  E9
+MOV B, R0  ->  88
+DIV AB     ->  84
+MOV R7, A  ->  F15
+MOV R6, B  ->  A14
+
+Exercício 7:
+
+0000| MOV R1, #250
+0002| MOV R0, #125
+0004| MOV A, R1
+0005| ADD A, R0
+0006| MOV R6, A
+0007| CLR A
+0008| ADDC A, #0
+000A| MOV R7, A
+
+
+Exercício 8:
+
+Instrução  | Opcode
+MOV A, R1  ->  E9
+ADD A, R0  ->  28
+MOV R6, A  ->  F14
+CLR A      ->  E4
+ADDC A, #0 ->  35 00
+MOV R7, A  ->  F15
+
+Exercício 9:
+
+0000| MOV R1, #6
+0002| MOV R0, #1
+0004| MOV R3, #5
+0006| MOV R2, #1
+0008| MOV A, R2
+0009| ADD A, R0
+000A| MOV R5, A
+000B| MOV A, R3
+000C| ADDC A, R1
+000D| MOV R6, A
+000E| CLR A
+000F| ADDC A, #0
+0011| MOV R7, A
+
+Exercício 10:
+
+Instrução  | Opcode
+MOV A, R2  ->  E10
+ADD A, R0  ->  28
+MOV R5, A  ->  F13
+MOV A, R3  ->  E11
+ADDC A, R1 ->  39
+MOV R6, A  ->  F14
+CLR A      ->  E4
+ADDC A, #0 ->  34 00
+MOV R7, A  ->  F15
+
+Exercício 11:
+
+0000| MOV R1, #5
+0002| MOV R0, #1
+0004| MOV R3, #6
+0006| MOV R2, #1
+0008| MOV A, R2
+0009| CLR C
+000A| SUBB A, R0
+000B| MOV R6, A
+000C| MOV A, R3
+000D| SUBB A, R1
+000E| MOV R7, A
+
+Exercício 12:
+
+Instrução  | Opcode
+MOV A, R2  ->  E10
+CLR C      ->  C3
+SUBB A, R0 ->  98
+MOV R6, A  ->  F14
+MOV A, R3  ->  E11
+SUBB A, R1 ->  99
+MOV R7, A  ->  F15

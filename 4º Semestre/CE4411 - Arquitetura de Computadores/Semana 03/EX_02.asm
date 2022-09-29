@@ -1,0 +1,4 @@
+MOV A, #0FEh
+RR A
+MOV P1, A
+AJMP 0002h

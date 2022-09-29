@@ -1,0 +1,8 @@
+org 0020h
+DB 10
+
+org 0030h
+MOV DPTR, #0020h
+CLR A
+MOVC A, @A+DPTR
+MOV R2,A

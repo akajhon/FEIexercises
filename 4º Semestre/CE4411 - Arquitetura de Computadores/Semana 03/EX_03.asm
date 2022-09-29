@@ -1,0 +1,4 @@
+MOV A, #0FEh
+RR A
+MOV P1, A
+SJMP -5 ;5 -2 +2 = 5
