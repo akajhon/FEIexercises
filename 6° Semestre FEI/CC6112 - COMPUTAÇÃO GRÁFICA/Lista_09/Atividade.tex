@@ -1,0 +1,113 @@
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 09 – Animação de Fluídos}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 09 – Animação de Fluídos - CC6112}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm,top=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 09 – Animação de Fluídos}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+Considerando uma subdivisão espacial para a simulação de um Sistema de Partículas
+baseada em SPH, explique porque consideramos um kernel gaussiano para a sua
+interpolação?\\
+\\
+\noindent\textbf{Solução:}
+
+Uma vez que desejamos que as partículas mais próximas da posição central \emph{r} tenham mais influência ou contribuam no cálculo da propriedade dentro do kernel, a função gaussiana é a mais apropriada para essa tarefa. Sabendo que a função gaussiana tem a média e o desvio padrão como variáveis, e considerando a posição \emph{r} como a média do SPH, apenas o desvio padrão influenciará nas particulas vizinhas. 
+
+Portanto, quanto maior o desvio padrão, mais partículas vizinhas terão a posição \emph{r}. Quanto menor o desvio padrão, menos partículas vizinhas existirão. Vale lembrar que o decaimento da curva  é importante, pois quanto mais distantes do topo as partículas estão, menos interferência elas possuem com a partícula central.
+\vspace{1cm}
+
+\noindent\textbf{Questão 02:}\\
+Quais os passos, na sequência correta da renderização, do método SPH para
+implementação de animação de fluídos?\\
+\\
+\noindent\textbf{Solução:}
+
+Para a implementação de animação de fluídos, devemos calcular algumas propriedades da partícula como:  Força de Pressão (F\textsubscript{p}), Força de Viscosidade (F\textsubscript{v}) e a  Força de gravidade (F\textsubscript{g}). Assim, em um loop, a cada iteração \emph{T} calcularemos essas forças e faremos a sua composição, assim como demonstrado abaixo.
+\[\mathbf{Q^t_i = F_p + F_g + F_v}\]
+
+Após isto, calculamos a Aceleração e a Velocidade e em seguida a nova posição da partícula. Por
+fim, as partículas vizinhas devem ser atualizadas.
+\vspace{0.5cm}
+
+\noindent\textbf{Questão 03:}\\
+Cite pelo menos duas razões para se fazer animação baseada em sistemas de
+partículas, dispensando-se a facilidade de desenhar quadro a quadro manualmente
+o escoamento do fluído.\\
+\\
+\noindent\textbf{Solução:}
+
+Num sistema de partículas menos recursos computacionais são exigidos, quando comparado a uma simulação de molécula a molécula. Além disso, no sistema de particulas também é mais fácil de se apresentar a interação entre as partículas e as simulações tornam-se mais realistas e eficientes.
+\vspace{1cm}
+
+\noindent\textbf{Questão 04:}\\
+Uma saída estratégica para diminuir a complexidade computacional de um algoritmo de
+simulação de fluídos que utiliza o SPH é manter uma lista de vizinhança $Li$ para cada
+partícula $i$ dentro da subdivisão espacial 3D. Justifique a complexidade computacional do
+algoritmo de simulação de fluídos que utiliza essa estratégia.\\
+\\
+\noindent\textbf{Solução:}
+
+Como cada célula possui uma lista com as suas partículas vizinhas, a busca é realizada apenas na célula onde a partícula é encontrada e em suas células vizinhas. Essa estratégia, reduz o custo computacional de $\mathbf{O(n^2)}$, para $\mathbf{O(n \cdot m)}$, onde \textbf{n}  ́e o número total de partículas e \textbf{m} é o número médio de partículas nas células vizinhas.
+\vspace{1cm}
+
+\noindent\textbf{Questão 05:}\\
+Para o algoritmo SPH, os seguintes cálculos devem ser executados (não
+necessariamente nessa ordem): \textit{Velocidade, Aceleração, Pressão, Atualização da
+nova Vizinhança , Posição da Partícula, Viscosidade, Velocidade}. Proponha uma
+ordem que faça sentido e explique o porquê.\\
+\\
+\noindent\textbf{Solução:}
+
+\noindent\textbf{Ordem Proposta:}
+
+\[Pressão \rightarrow Viscosidade \rightarrow Aceleração \rightarrow Velocidade \rightarrow \text{Posição da Partícula}\]
+\[\rightarrow \text{Atualização da nova Vizinhança.}\]
+
+Esta ordem deve ser seguida, pois é necessário primeiramente calcular as propriedades físicas da partícula (Pressão e Viscosidade) e logo após, é necessário descobrir a que ponto a partícula se direciona (Aceleração, Velocidade e Posição da Partícula). Por fim, atualizam-se as partículas vizinhas, já que estas sofreram influência da partícula em questão.Vale lembrar que é comum considerarmos a mesma massa para todas as partículas.
+\vspace{1cm}
+
+\noindent\textbf{Questão 06:}\\
+Explique o porquê uma simulação de fluídos não representa estritamente a realidade física.\\
+\\
+\noindent\textbf{Solução:}
+
+Uma simulação de Fluídos não representa a realidade física porque atualmente é impossível  simular molécula por molécula, devido à isto, simulamos um sistema de partículas inteiro.
+
+\vspace{1cm}
+
+\noindent\textbf{Questão 07:}\\
+Pense em algum problema que possa fazer uso as simulação de fluídos, mas não necessariamente é fluído. \\
+\\
+\noindent\textbf{Solução:}
+
+Podemos fazer a simulação de fluídos em uma piscina de bolinhas, por exemplo: Neste caso, se as bolinhas estivessem se mexendo,  seria possivel encontrar o fluxo delas. Outro exemplo, seriam em Deslizamento de encostas e Avalanches.
+\end{document}

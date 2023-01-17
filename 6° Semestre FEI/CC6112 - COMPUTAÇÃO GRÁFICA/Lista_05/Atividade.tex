@@ -1,0 +1,421 @@
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 05 - Registro de Imagens}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 05 - Registro de Imagens - CC6112}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 05 - Registro de Imagens}
+\end{center}
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+Seja uma imagem \emph{gray scale} que sofreu uma deformação após a mudança de perspectiva da câmera. Para aplicar uma transformação inversa, que recupere a imagem original a partir da imagem deformada, pode-se usar um modelo de apenas dois pontos de controle. Sendo o modelo da forma:
+\[
+\begin{cases}
+x = C1x' + C2y' + C3x'y' + C4 \\
+y = C5x' + C6y' + C7x'y' + C8
+\end{cases}
+\]
+\begin{itemize}
+    \item Considerando 4 pontos e controle na imagem original – \emph{(x1, y1), (x2, y2), (x3, y3), (x4, y4) = (−3, 3),(3, 3),(−3, −3),(3, −3) } – e 4 pontos correspondentes em uma imagem deformada - \emph{(x'1y'1), (x'2, y'2), (x'3, y'3), (x'4, y'4) = (−1, 3),(5, 3),(−5, −3),(1, −3) } –, monte os sistemas lineares que podem achar as constantes Ci de acordo com o Modelo (1). 
+    \item Resolva os sistemas e encontre as constantes do Modelo (1). 
+    \item Suponha agora que, na imagem deformada, você consegue ler os seguintes pontos: \emph{(0.5, 3),(1.5, 3), (4.5, 3),(−0.5, 3),(−0.7, 3),(0.3, −3),(−4.3, −2),(−2.7, 0.5),(1.7, −2),(4.3, 2) }. Responda, usando seu modelo de deformação linear encontrado, quais os valores recuperados da imagem original ? 
+    \item Recomendo, utilizando os valores numéricos dados, rascunhar as imagens originais e deformadas em um eixo cartesiano para entendê-las melhor.Também recomendo realizar todos os cálculos em algum sistema web de sua preferência de análise matemática online, ou alguma linguagem de programação.
+\end{itemize}
+\\
+\noindent\textbf{Solução:}
+\\
+\noindent\text{Sistemas Lineares Montados:}
+\[
+\begin{cases}
+X1: C_1 \cdot (-1) + C_2 \cdot 3 + C_3 \cdot (-1) \cdot 3 + C_4 = -3 \\
+X2: C_1 \cdot 5 + C_2 \cdot 3 + C_3 \cdot 5 \cdot 3 + C_4 = 3 \\
+X3: C_1 \cdot (-5) + C_2 \cdot (-3) + C_3 \cdot (-5) \cdot -3 + C_4 = -3 \\
+X4: C_1 \cdot 1 + C_2 \cdot (-3) + C_3 \cdot 1 \cdot (-3) + C_4 = 3 \\
+Y1: C_5 \cdot (-1) + C_6 \cdot 3 + C_7 \cdot 1 \cdot (-3) + C_8 = 3 \\
+Y2: C_5 \cdot 5 + C_6 \cdot 3 + C_7 \cdot 5 \cdot 3 + C_8 = 3 \\
+Y3: C_5 \cdot (-5) + C_6 \cdot (-3) + C_7 \cdot (-5) \cdot (-3) + C_8 = -3 \\
+Y4: C_5 \cdot 1 + C_6 \cdot (-3) + C_7 \cdot 1 \cdot (-3) + C_8 = -3 \\
+\end{cases}
+\]
+\[
+C_1 = 1; C_2 = -0.667;
+C_3 = 0; C_4 = 0;
+C_5 = 0; C_6 = 1;
+C_7 = 0; C_8 = 0
+\]
+
+\\
+\noindent\text{Variável \textbf{X}:}
+\[
+\begin{bmatrix}
+   -3\\
+    3\\
+   -3\\
+    3\\
+\end{bmatrix}=
+\begin{bmatrix}
+   -3 & 3 & -3 & 1\\
+    5 & 3 & 15 & -1\\
+   -5 & -3 & 15 & 1\\
+    1 & -3 & -3 & 1\\
+\end{bmatrix}=
+\begin{bmatrix}
+   C_1\\
+   C_2\\
+   C_3\\
+   C_4\\
+\end{bmatrix}
+\]
+\noindent\text{Para \textbf{X} temos que:}
+\[
+\begin{bmatrix}
+   C_1\\
+   C_2\\
+   C_3\\
+   C_4\\
+\end{bmatrix}=
+A\textsuperscript{-1} \cdot 
+\begin{bmatrix}
+   X_1\\
+   X_2\\
+   X_3\\
+   X_4\\
+\end{bmatrix}
+\]
+
+\[
+\therefore
+\begin{bmatrix}
+   1\\
+  -2\\
+   3\\
+   0\\
+\end{bmatrix}
+\]
+\\
+\noindent\text{Variável \textbf{Y}:}
+\[
+\begin{bmatrix}
+    3\\
+    3\\
+   -3\\
+   -3\\
+\end{bmatrix}=
+\begin{bmatrix}
+   -1 & 3 & -3 & 1\\
+    5 & 3 & 15 & 1\\
+   -5 & -3 & 15 & 1\\
+    1 & -3 & -3 & 1\\
+\end{bmatrix}=
+\begin{bmatrix}
+   C_5\\
+   C_6\\
+   C_7\\
+   C_8\\
+\end{bmatrix}
+\]
+\noindent\text{Para \textbf{Y} temos que:}
+\[
+\begin{bmatrix}
+   C_5\\
+   C_6\\
+   C_7\\
+   C_8\\
+\end{bmatrix}=
+B\textsuperscript{-1} \cdot 
+\begin{bmatrix}
+   Y_1\\
+   Y_2\\
+   Y_3\\
+   Y_4\\
+\end{bmatrix}
+\]
+\[
+\therefore
+\begin{bmatrix}
+   0\\
+   1\\
+   0\\
+   0\\
+\end{bmatrix}
+\]
+\noindent\text{Ao projetar os pontos requisitados, teremos:}
+\[
+P_1(0.5, 3): x = 0.5 + (-0.667)*3 = -1.501 y = 3 \rightarrow \mathbf{P_1 = (-1.5, 3)}
+\]
+\vspace{0.1cm}
+\[
+P_2(1.5, 3): x = 1.5 + (-0.667)*3 = -0.501 y = 3 \rightarrow \mathbf{P_2 = (-0.5, 3)}
+\]
+\vspace{0.1cm}
+\[
+P_3(4.5, 3): x = 4.5 + (-0.667)*3 = 2.499 y = 3 \rightarrow \mathbf{P_3 = (2.5, 3)}
+\]
+\vspace{0.1cm}
+\[
+P_4(-0.5, 3): x = -0.5 + (-0.667)*3 = -2.501 y = 3 \rightarrow \mathbf{P_4 = (-2.5, 3)}
+\]
+\vspace{0.1cm}
+\[
+P_5(-0.7, 3): x = -0.7 + (-0.667)*3 = -2.701 y = 3 \rightarrow \mathbf{P_5 = (-2.7, 3)}
+\]
+\vspace{0.1cm}
+\[
+P_6(0.3, -3): x = 0.3 + (-0.667)*(-2) = 2.301 y = -3 \rightarrow \mathbf{P_6 = (2.3, -3)}
+\]
+\vspace{0.1cm}
+\[
+P_7(-4.3, 2): x = -4.3 + (-0.667)*(-2) = -2.966 y = -2 \rightarrow \mathbf{P_7 = (-3, -2)}
+\]
+\vspace{0.1cm}
+\[
+P_8(-2.7, 0.5): x = -2.7 + (-0.667)*0.5 = -3.0335 y = 0.5 \rightarrow \mathbf{P_8 = (-3, 0.5)}
+\]
+\vspace{0.1cm}
+\[
+P_9(1.7, -2): x = 1.7 + (-0.667)*(-2) = 3.034 y = -2 \rightarrow \mathbf{P_9 = (3, -2)}
+\]
+\vspace{0.1cm}
+\[
+P_\textsubscript{10}(4.3, 2): x = 4.3 + (-0.667)*2 = 2.966 y = 2 \rightarrow \mathbf{P_\textbf{\textsubscript{10}} = (3, 2)}
+\]
+\vspace{0.5 cm}
+
+\noindent\textbf{Questão 02:} \\
+O método de Registro de Imagens acontece dentro do processo de Realidade Aumentada com o uso de um marcador artificial, que é uma imagem que deve ser detectada e ”distorcida” com base em uma outra imagem ”normal”. No desenho da Figura 1 abaixo, a imagem ”normal” é a da esquerda, e a imagem ”torcida” é a da direita; e as curvas pontilhadas ligando os dois desenhos representam pares de pontos correspondentes entre ambas as imagens. Esse processo é realizado com o casamento desses dois conjuntos de pontos correspondentes, escolhidos apropriadamente. Supondo que o conjunto de pontos da imagem-base à esquerda seja: \emph{(x1, y1), (x2, y2), (x3, y3),(x4, y4)}, e outro na imagem alvo à direita seja: \emph{(x'1, y'1), (x'2, y'2), (x'3, y'3),(x'4, y'4)}.
+
+\noindent Para que seja possível corrigir a imagem da direita, um sistema linear deve ser montado e resolvido, segundo uma equação-modelo. Se a equação-modelo é do tipo $(X = C_1X' + C_2Y')$, um pouco diferente do modelo da questão 1, apresente os sistemas lineares somente para os dois primeiros pares de pontos correspondentes: \emph{(x1, y1)} e \emph{(x2, y2)}, criando constantes \emph{C1, C2, C3, C4, ...}, de acordo com sua conveniência.
+\\
+\\
+\noindent\textbf{Solução:}\\
+\noindent\text{Tomando por base a equação-modelo fornecida, temos que:}
+\[
+\text{Sendo } C = A\textsuperscript{-1} \cdot V
+\]
+\[
+\begin{cases}
+X_1 = C_1 X_1'+ C_2 Y_1' \\
+Y_1 = C_3 X_1' + C_4 Y_1'
+\end{cases}
+\begin{cases}
+X_2 = C_1 X_2' + C_2 Y_2' \\
+Y_2 = C_3 X_2' + C_4 Y_2'
+\end{cases}
+\]
+\[
+\therefore
+A = 
+\begin{cases}
+X_1 = C_1 X_1' + C_2 Y_1' \\
+X_2 = C_1 X_2' + C_2 Y_2'
+\end{cases}
+B = 
+\begin{cases}
+Y_1 = C_3 X_1' + C_4 Y_1' \\
+Y_2 = C_3 X_2' + C_4 Y_2'
+\end{cases}
+\]
+\vspace{0.5 cm}
+\\
+\noindent\textbf{Questão 03:}
+Um modelo de registro de imagens (idêntico ao abordado na vídeo-aula) é o seguinte: \emph{{P1 = CP2}}. Na Figura 2-a aparece uma imagem de um marcador, que foi rastreada, segmentada, e obtivemos os seguintes pontos-chaves, indicados na própria imagem, no plano da câmera \emph{(x,y): {(x1, y1),(x2, y2),(x3, y3),(x4, y4)}}. Esse marcador aparece na Figura 2-b com suas coordenadas originais (sem nenhuma distorção). Após o registro, queremos projetar sobre essa figura a pirâmide que aparece na Figura 2-c, cujas coordenadas da base (também no plano (x,y)) aparecem também indicadas na figura, de maneira a obtermos o efeito que aparece na Figura 2-d. Calcule os valores finais dos pontos-chaves da pirâmide que devem ser projetados nessa figura. Observe que a profundidade da pirâmide (para que ela apareça 3D) é resolvida apenas projetando proporcionalmente a sua altura a partir da altura original conhecida; ou seja, o proplema pode ser resolvido em 2D apenas para a base, e estimado a altura 3D proporcionalmente às dimensões originais. Assim, o resultado pedido pode ser dado apenas para a base da pirâmide (2D).
+\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[
+A = 
+\begin{bmatrix}
+    -8 & 8 & -64 & 1\\
+     8 & 8 & 64 & 1\\
+     -8 & -8 & 64 & 1\\
+     8 & -8 & -64 & 1\\
+\end{bmatrix}
+A_z = 
+\begin{bmatrix}
+   -4 & -4 & 16 & 1\\
+   -4 & 4 & -16 & 1\\
+    4 & -4 & -16 & 1\\
+    4 &  4 & 16 & 1\\
+\end{bmatrix}
+\]
+\vspace{0.3cm}
+\[
+V_x = 
+\begin{bmatrix}
+   1\\
+   11\\
+   5\\
+   19\\
+\end{bmatrix}
+V_y = 
+\begin{bmatrix}
+   14\\
+   16\\
+   4\\
+   8\\
+\end{bmatrix}
+\]
+\vspace{0.3cm}
+\noindent\text{Para \textbf{C\textsubscript{x}} temos que:}\\
+\[
+C_x = A\textsuperscript{-1} \cdot V_x = 
+\begin{bmatrix}
+   0.75\\
+   -0.375\\
+   -0.01563\\
+   9\\
+\end{bmatrix}
+\]
+\vspace{0.3cm}
+\[
+C_x = 
+\begin{bmatrix}
+   7.25\\
+   4.75\\
+   13.75\\
+   10.25\\
+\end{bmatrix}
+\]
+\vspace{0.3cm}
+\noindent\text{Para \textbf{C\textsubscript{y}} temos que:}\\
+\[
+C_y = A\textsuperscript{-1} \cdot V_y = 
+\begin{bmatrix}
+   0.1875\\
+   0.5625\\
+   -0.0078\\
+   10.5\\
+\end{bmatrix}
+\]
+\vspace{0.3cm}
+\[
+A_z \cdot C_y = 
+\begin{bmatrix}
+   7.375\\
+   12.13\\
+   9.125\\
+   13.38\\
+\end{bmatrix}
+\]
+\noindent\text{Sistemas Lineares Montados:}
+\[
+\begin{cases}
+X1: C_1 \cdot (-8) + C_2 \cdot 8 + C_3 \cdot (-8) \cdot 8 + C_4 = 1 \\
+X2: C_1 \cdot 8 + C_2 \cdot 8 + C_3 \cdot 8 \cdot 8 + C_4 = 11 \\
+X3: C_1 \cdot (-8) + C_2 \cdot (-8) + C_3 \cdot (-8) \cdot (-8) + C_4 = 5 \\
+X4: C_1 \cdot 8 + C_2 \cdot (-8) + C_3 \cdot 8 \cdot (-8) + C_4 = 19 \\
+Y1: C_5 \cdot (-8) + C_6 \cdot 8 + C_7 \cdot (-8) \cdot 8 + C_8 = 14 \\
+Y2: C_5 \cdot 8 + C_6 \cdot 8 + C_7 \cdot 8 \cdot 8 + C_8 = 16 \\
+Y3: C_5 \cdot (-8) + C_6 \cdot (-8) + C_7 \cdot (-8) \cdot (-8) + C_8 = 4 \\
+Y4: C_5 \cdot 8 + C_6 \cdot (-8) + C_7 \cdot 8 \cdot (-8) + C_8 = 8 \\
+\end{cases}
+\]
+\noindent\text{Tendo:}
+\vspace{0.3cm}
+\[
+C_1 = 0.75; C_2 = -0.375;
+C_3 = -0.016; C_4 = 9;
+C_5 = 0.188; C_6 = 0.563;
+C_7 = -0.008; C_8 = 10.5
+\]
+\vspace{0.3cm}
+\[
+P_1 = (1, 14); P_2 = (11, 16);
+P_3 = (5, 4); P_4 = (19, 8)
+\]
+\vspace{0.3cm}
+\[
+P_1' = (-8, 8); P_2' = (8, 8);
+P_3' = (-8, -8); P_4' = (8, -8)
+\]\\
+\vspace{0.5cm}
+\noindent\text{Portanto, Os valores finais dos pontos-chaves da pirâmide que devem ser projetados
+nessa figura são:}
+\[
+P_1 = (-4, -4) \rightarrow \mathbf{P_1 = (7.244, 7.368)}
+\]
+\[
+P_2 = (-4, 4) \rightarrow \mathbf{P_2 = (4.756, 12.128)}
+\]
+\[
+P_3 = (4, -4) \rightarrow \mathbf{P_3 = (13.756, 9.128)}
+\]
+\[
+P_4 = (4, 4) \rightarrow \mathbf{P_4 = (10.244, 13.376)}
+\]
+\\
+\vspace{0.5cm}
+\noindent\textbf{Questão 04:}\\
+Registro de imagens possui uma aplicação muito útil na área da medicina, sobretudo para imagens médicas. Um paciente fez duas tomografias, mostradas na Figura 3 a seguir. No momento da aquisição da imagem mostrada à esqueda da Figura 3, o paciente moveu-se levemente, o que fez com que a imagem produzida ficasse levemente torcida. No momento da aquisição da imagem à direita, o paciente manteve-se imóvel e a imagem produzida ficou normal. Para comparar as duas imagens, o radiologista precisa distorcer a imagem à esquerda. Você é amigo desse radiologista e, sendo você especialista no assunto de registro de imagens, ele chamou você para resolver o problema. Para ajudar você, a seu pedido, o radiologista marcou em vermelho nas duas imagens os pontos que deveriam ser correspondentes. Assim, você decidiu propor um modelo de regostro e calcular essa correspondência. Como você faria isso? Note que você deverá propor também, a escala e resolução das duas imagens.
+\\
+\\
+\\
+\noindent\textbf{Solução:}
+\\
+Assim como informado, o equipamento utilizado nas duas imagens é o mesmo e, portanto, a escala utilizada também seria a mesma, já que o que difere as duas imagens é apenas o movimento realizado pelo paciente. Logo, como existem pontos conhecidos e suas posições originais são explicitadas na imagem à direita, se aplicarmos a propriedade abaixo, iremos obter a matriz \textbf{C}, que contém as constantes de transformação(C\textsubscript{1} - C\textsubscript{8}). A partir dai, aplicaremos estas constantes nos pontos da imagem deformada, revertendo assim a distorção gerada pelo movimento.
+\\
+\[
+\begin{cases}
+X = C_1 X' + C_2 Y' + C_3 X' Y' + C_4 \\
+Y = C_5 X' + C_6 Y' + C_7 X' Y' + C_8
+\end{cases}
+\]
+Como exemplo, ao tomarmos uma escala de 0 à 100 nos eixos \emph{X} e \emph{Y} encontraríamos as constantes C\textsubscript{1} à C\textsubscript{8} e utilizaríamos estas constantes para distorcer a imagem para a esquerda, usando os 4 pontos dados pelo médico.Portanto, neste caso teremos:
+\[
+P1 = (20, 20); P2 = (30, 70);
+P3 = (50, 60); P4 = (70, 70);
+P5 = (70, 20)
+\]
+\[
+P1' = (20, 20); P2' = (25, 75);
+P3' = (50, 60); P4' = (70, 70);
+P5' = (70, 15)
+\]
+\noindent\text{Sistemas Lineares encontrado:}
+\[
+\begin{cases}
+X1: C_1 \cdot 20 + C_2 \cdot 20 + C_3 \cdot 20 \cdot 20 + C_4 = 20 \\
+X2: C_1 \cdot 25 + C_2 \cdot 75 + C_3 \cdot 25 \cdot 75 + C_4 = 30 \\
+X3: C_1 \cdot 70 + C_2 \cdot 70 + C_3 \cdot 70 \cdot 70 + C_4 = 70 \\
+X4: C_1 \cdot 70 + C_2 \cdot 15 + C_3 \cdot 70 \cdot 15 + C_4 = 70 \\
+Y1: C_5 \cdot 20 + C_6 \cdot 20 + C_7 \cdot 20 \cdot 20 + C_8 = 20 \\
+Y2: C_5 \cdot 25 + C_6 \cdot 75 + C_7 \cdot 25 \cdot 75 + C_8 = 70 \\
+Y3: C_5 \cdot 70 + C_6 \cdot 70 + C_7 \cdot 70 \cdot (70) + C_8 = 70 \\
+Y4: C_5 \cdot 70 + C_6 \cdot 15 + C_7 \cdot 70 \cdot 15 + C_8 = 20 \\
+\end{cases}
+\]
+\noindent\text{Constantes encontradas:}
+\[
+C_1 = 1.04; C_2 = 0,141; C_3 = -0,002; C_4 = -2,828;
+C_5 = 0,087; C_6 = 0,896; C_7 = 0; C_8 = 0,257
+\]
+\vspace{1cm}
+
+\end{document}
+

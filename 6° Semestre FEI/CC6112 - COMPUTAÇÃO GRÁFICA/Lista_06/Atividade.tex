@@ -1,0 +1,218 @@
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 06 - Iluminação}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 06 - Iluminação - CC6112}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm,top=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 06 - Iluminação}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}\\
+A figura a seguir ilustra a projeção de um poliedro \emph{P} \emph{3D} sendo criada no buffer de imagem, onde as intensidades das componentes de luz refletidas em cada ponto são respectivamente \emph{$ I_1(x1,y1) = 20,$ $I_2(x2,y2) = 0,$ $I_3(x3,y3) = 10,$ e $I_4(x4,y4) = 45$}. Sabendo- se que a reta imaginária \emph{L} corta \emph{P} em \emph{$I_6$} e \emph{$I_5$} a meia distância entre \emph{$I_1-I_3$} e \emph{$I_2-I_4$},respectivamente, qual o valor da luz refletida no ponto \emph{$I_7$} sobre \emph{L}, se for usada a técnica de Gouraud. Assuma que \emph{$I_7$} está a $\frac{3}{4}$ de \emph{$I_5$} e $\frac{1}{4}$ de \emph{$I_6$}\\
+\\
+\noindent\textbf{Solução:}
+\[I_5 = \frac{0 + 45}{2}\]
+\[\mathbf{I_5 = 22,5}\]
+
++\[I_6 = \frac{20 + 10}{2}\]
+\[\mathbf{I_6 = 15}\]
+
+\[I_7 = 0,75 \cdot 15 + 0,25 \cdot 22,5\]
+\[\mathbf{I_7 = 16,875}\]
+
+\noindent\textbf{Questão 02:}\\
+Considere o seguinte modelo de Iluminação:
+
+\[I = I_a r_a + I_d r_d \cos{\theta}\]
+
+onde \emph{I} é a intensidade de luz resultante, \emph{Ia} é a intensidade de luz ambiente, \emph{r\textsubscript{a}} é o coeficiente de reflexão da luz ambiente, \emph{I\textsubscript{d}} é a intensidade de luz difusa, \emph{r\textsubscript{d}} é o coeficiente de reflexão de luz difusa, e $\theta$ é o ângulo de incidência.
+
+Considere também a malha triangular que, após sofrer uma transformação em
+perspectiva, é projetada no seu monitor da seguinte maneira.
+
+Observe que essa malha possui 6 pontos indicados de 1 a 6 (são as
+bolinhas brancas). Desses 6 pontos, sabemos as intensidades de luz nos pontos
+1, 2 e 3, foram calculadas segundo o Modelo de iluminação dado. Temos também
+as seguintes informações: a intensidade de luz ambiente é \emph{L} e a intensidade de
+luz difusa é \emph{2L}; o coeficiente de reflexão da luz ambiente vale $\frac{1}{3}$ do coeficiente de reflexão da luz difusa; no ponto 1 a luz difusa é refletida com um ângulo $\theta$ cujo cosseno vale $\frac{1}{3}$; no ponto 2, esse valor vale $\frac{1}{2}$, e no ponto 3, esse valor vale 1.0. Sabemos que o ponto 4 está no ponto médio entre os pontos 1 e 2, e a distância do ponto 5 ao ponto 1 é $\frac{1}{3}$ da distância entre o ponto 5 e o ponto 3.
+
+Com essas informações, qual o valor da intensidade de luz no ponto 6, que
+está na metade da distância entre os pontos 4 e 5, em função de \emph{L} e \emph{r\textsubscript{a}}, considerando que o algoritmo usado é o de Gouraud e a linha tracejada é a scanline.
+\\
+\\
+\noindent\textbf{Solução:}\\
+\noindent A partir do enunciado, temos os seguintes valores para as variáveis descritas abaixo:
+\[I = I_a \cdot r_a + I_d \cdot r_d \cdot \cos{\theta}\]
+\begin{center}
+    $I_a = L$ \hspace{20pt} $I_d = 2L$
+\end{center}
+\[r_a = 3 \cdot r_d\]
+\begin{center}
+    $\cos{\theta_1} = \frac{1}{3}$ \hspace{20pt} $\cos{\theta_2} = \frac{1}{2}$
+\end{center}
+\[\cos{\theta_3} = 1\]
+
+\noindent Dessa forma, aplicando os valores descritos acima na fórmula também mencionada, encontraremos os valores das Intensidades 1 à 6:
+\[I_1 = L \cdot r_a + 2 \cdot L \cdot \frac{r_a}{3} \cdot \frac{1}{3}\]
+\[I_1 = L \cdot r_a + \frac{2 \cdot L \cdot r_a}{9}\]
+\[I_1 = \frac{9 \cdot L \cdot r_a + 2 \cdot L \cdot r_a}{9} = \frac{11 \cdot L \cdot r_a}{9}\]
+\[\mathbf{I_1 = 1,22 \cdot L \cdot r_a}\]
+
+\[I_2 = L \cdot r_a + 2 \cdot L \cdot \frac{r_a}{3} \cdot \frac{1}{2}\]
+\[I_2 = L \cdot r_a + \frac{2 \cdot L \cdot r_a}{6}\]
+\[I_2 = \frac{6 \cdot L \cdot r_a + 2 \cdot L \cdot r_a}{6} = \frac{8 \cdot L \cdot r_a}{6}\]
+\[\mathbf{I_2 = 1,33 \cdot L \cdot r_a}\]
+
+\[I_3 = L \cdot r_a + 2 \cdot L \cdot \frac{r_a}{3} \cdot 1\]
+\[I_3 = L \cdot r_a + \frac{2 \cdot L \cdot r_a}{3}\]
+\[I_3 = \frac{3 \cdot L \cdot r_a + 2 \cdot L \cdot r_a}{3} = \frac{5 \cdot L \cdot r_a}{3}\]
+\[\mathbf{I_3 = 1,67 \cdot L \cdot r_a}\]
+
+\[I_4 = \frac{1,22 \cdot L \cdot r_a + 1,33 \cdot L \cdot r_a}{2}\]
+\[\mathbf{I_4 = 1,275 \cdot L \cdot r_a}\]
+
+\[I_5 = 0,75 \cdot 1,22 \cdot L \cdot r_a + 0,25 \cdot 1,67 \cdot L \cdot r_a\]
+\[\mathbf{I_5 = 1,3325 \cdot L \cdot r_a}\]
+\vspace{0.2cm}
+\[I_6 = \frac{1,275 \cdot L \cdot r_a + 1,3325 \cdot L \cdot r_a}{2}\]
+\[\mathbf{I_6 = 1,30375 \cdot L \cdot r_a}\]
+\vspace{1cm}
+
+\noindent\textbf{Questão 03:}\\
+O modelo de sombreamento de Gouraud, as intensidades luminosas são interpoladas, enquanto que no de Phong, são os ângulos das normais aos planos das faces os elementos que são interpolados. Ambos são um avanço sobre o modelo de iluminação constante. Com relação a esses três modelos, é correto afirmar:
+\begin{itemize}
+    \item a) O modelo de Gouraud é mais adequado do que Phong em processos de renderização que vão além do sombreamento, tais como simulações físicas, texturização ou remoção de artefatos como alisings.
+    \item b) O modelo de Phong exige a interpolação ponderada, e o modelo de Gouraud exige somente uma média simples das extremidades.
+    \item c) Ambos os modelos apresentam artefatos em baixa resolução. Mas em cenários em que um objeto de animação se locomove, a sensação que se tem, quando a renderização utilizada é a de Gouraud, é que existem artefatos que se locomovem sobre a superfície do objeto.
+    \item d) Para ambos os modelos, quando a interpolação é feita sobre uma superfície triangular, leva-se em conta um método de rasterização horizontal; ou seja, a interpolação é sempre na linha horizontal, nunca em outra direção.
+\end{itemize}\\
+\\
+\noindent\textbf{Solução:}
+\begin{itemize}
+    \item a) \textbf{F}
+    \item b) \textbf{F}
+    \item c) \textbf{V}
+    \item d) \textbf{V}
+\end{itemize}
+Portanto, a alternativa correta é a alternativa III: \textbf{Somente as alternativas (c) e (d) estão corretas}.
+\vspace{1cm}
+
+\noindent\textbf{Questão 04:}\\
+Seja um modelo de iluminação ambiente dado por $I_a = I_a r_a$, onde \emph{I\textsubscript{a}} é a intensidade de luz e \emph{r\textsubscript{a}} uma propriedade física que depende da reflexão da luz ambiente. Seja também um outro modelo de iluminação difusa, dado por $ID = I_d r_d \cos{x}$, onde \emph{l\textsubscript{d}} é a intensidade de um spot de luz difusa, \emph{r\textsubscript{d}} uma propriedade física que depende da reflexão da luz difusa e \emph{x} é o ângulo de incidência em graus. A Figura a seguir mostra uma malha no plano, onde os pontos com bolinhas azuis são os locais onde são calculadas as intensidades de luz, considerando os dois modelos descritos acima. Os pontos de 1 a 5 você pode calcular com o modelo de luz ambiente-difusa?\\
+Sabendo-se que a intensidade de luz ambiente é 30 e do spot de luz difusa é 100, \emph{r\textsubscript{a} = 0.5} e \emph{r\textsubscript{d} = 0.4}, e que o cosseno de x nos pontos de 1 a 5 são respectivamente 0.1, 0.2, 0.4, 0.5 e 0.3, calcule a intensidade de luz no ponto 6, segundo o modelo de Gouraud, sabendo também que a distância entre os pontos 1 e 2 é 10, entre os pontos 1 e 6 (que está verticalmente abaixo de do ponto 1) é 6, e entre os pontos 1 e 3 é 20, e a reta que sai do ponto 1 e cruza a reta horizontal (que vai do ponto 2 ao 3) no ponto 6 é ortogonal à essa reta.\\
+\\
+\noindent\textbf{Solução:}\\
+\noindent Para iniciar, usaremos as equações explicitadas abaixo:
+\[I_A = I_a \cdot r_a\] 
+\[I_D = I_d \cdot r_d \cdot \cos{X}\]
+
+\noindent A partir do enunciado, temos os seguintes valores para as variáveis descritas abaixo:
+\begin{center}
+$I\textsubscript{a} = 30$ \hspace{20pt} $I\textsubscript{d} = 100$
+\end{center}
+\begin{center}
+$r\textsubscript{a} = 0,5$ \hspace{20pt} $r\textsubscript{d} = 0,4$
+\end{center}
+\begin{center}
+\hspace{20pt} $\cos{X_1} = 0,1$ \hspace{20pt} $\cos{X_2} = 0,2$
+\end{center}
+\begin{center}
+\hspace{20pt} $\cos{X_3} = 0,4$ \hspace{20pt} $\cos{X_4} = 0,5$
+\end{center}
+\begin{center}
+\hspace{20pt} $\cos{X_5} = 0,3$
+\end{center}
+
+\noindent Utilizando o Teorema de Pitágoras, conseguimos encontrar o valor da distância entre os pontos 2 e 6:
+\[10^2 = x^2 + 6^2\]
+\[100 = x^2 + 36\]
+\[x^2 = 100-36\]
+\[x^2 = 64\]
+\[x = 8\]
+
+\noindent Também utilizando o Teorema de Pitágoras, conseguimos encontrar o valor da distância entre os pontos 3 e 6:
+\[20^2 = x^2 + 6^2\]
+\[400 = x^2 + 36\]
+\[x^2 = 400 - 36\]
+\[x^2 = 364\]
+\[x = 19,08\]
+
+\noindent De posse destes valores, conseguimos calcular o coeficiente utilizado para calcular a luminosidade:
+
+\[19.08 + 8 = 27,08\]
+
+\noindent\text{Valor do primeiro coeficiente:}
+\[\frac{27.08}{8} = \frac{1}{x}\]
+\[x = \frac{8}{27.08}\]
+\[x = 0.295\]
+
+\noindent\text{Valor do segundo coeficiente:}
+\[\therefore 1 - 0.295 = 0.705\]
+
+\noindent\text{Utilizando os valores encontrados anteriormente, teremos:}
+\[I_1 = 30 \cdot 0,5 + 100 \cdot 0,4 \cdot 0,1 \rightarrow \mathbf{I_1 = 19}\]
+\[I_2 = 30 \cdot 0,5 + 100 \cdot 0,4 \cdot 0,2 \rightarrow \mathbf{I_2 = 23}\]
+\[I_3 = 30 \cdot 0,5 + 100 \cdot 0,4 \cdot 0,4 \rightarrow \mathbf{I_3 = 31}\]
+\[I_4 = 30 \cdot 0,5 + 100 \cdot 0,4 \cdot 0,5 \rightarrow \mathbf{I_4 = 35}\]
+\[I_5 = 30 \cdot 0,5 + 100 \cdot 0,4 \cdot 0,3 \rightarrow \mathbf{I_5 = 27}\]
+\[I_6 = 0,705 \cdot I_2 + 0,295 \cdot I_3 \rightarrow 0,705 \cdot 23 + 0,295 \cdot 31 \rightarrow \mathbf{I_6 = 25,36}\]
+\vspace{1cm}
+
+\noindent\textbf{Questão 05:}\\
+Considere um modelo de iluminação que envolve a iluminação ambiente, uma luz difusa e uma luz especular. Esse modelo é dado a seguir: 
+
+\[I = I_a r_a + I_d r_d \cos{\beta_i} + I_e r_e \cos{\beta_i}; i = {1, 2}\]
+
+Nesse modelo, \emph{r\textsubscript{a}}, \emph{r\textsubscript{d}} e \emph{r\textsubscript{e}} são os coeficientes de reflexão da luz ambiente, difusa e especular, respectivamente. A Figura a seguir mostra um esquema de um corte transversal de uma esfera, mostrando um cenário de iluminação que usa a equação acima. Nessa figura, existem três pontos de incidência: 1, 2 e 3. Os vetores de reflexão em cada ponto são mostrados como \emph{V1}, \emph{V2} e \emph{V3}, com seus respectivos ângulos de reflexão, $\beta_1$ e $\beta_2$, em relação à fonte de luz \emph{O}. A linha pontilhada que vai da fonte de luz O ao ponto 1 é ortogonal à linha que passa pelos pontos 1 e 2; esta também é ortogonal à linha que passa pelos pontos 4 e 3. O ponto 4 é o centro da esfera. Sabendo que \emph{r\textsubscript{a} = 0.5}, \emph{r\textsubscript{d} = 0.1}, \emph{r\textsubscript{e} = 0.25}, $\alpha = 60\degree$, $\theta = 30\degree$, \emph{I\textsubscript{a} = 10}, \emph{I\textsubscript{d} = 100} e \emph{I\textsubscript{3} = 200}, usando o modelo de sombreamento de Gouraud, qual o valor da intensidade refletida no ponto 3?\\
+\\
+\noindent\textbf{Solução:}
+\begin{center}
+    $\beta_1 = 60\degree$ \hspace{20pt} $\beta_2 = 90\degree$
+\end{center}
+\begin{center}
+    $r_a = 0,5$ \hspace{20pt} $I_a = 10$
+\end{center}
+\begin{center}
+    $r_d = 0,1$ \hspace{20pt} $I_d = 100$
+\end{center}
+\begin{center}
+    $r_e = 0,25$ \hspace{20pt} $I_e = 200$
+\end{center}
+\[I_1 = 10 \cdot 0,5 + 100 \cdot 0,1 \cdot \cos{60\degree} + 200 \cdot 0,25 \cdot \cos{60\degree}\]
+\[\therefore \mathbf{I_1 = 35}\]
+\vspace{0.2cm}
+\[I_2 = 10 \cdot 0,5 + 100 \cdot 0,1 \cdot \cos{90\degree} + 200 \cdot 0,25 \cdot cos{90\degree}\]
+\[\therefore \mathbf{I_2 = 5}\]
+\vspace{0.2cm}
+\[I_3 = \frac{I1 + I2}{2}\]
+\[I_3 = \frac{35 + 5}{2}\]
+\[\therefore \mathbf{I_3 = 20}\]
+
+\end{document}
+

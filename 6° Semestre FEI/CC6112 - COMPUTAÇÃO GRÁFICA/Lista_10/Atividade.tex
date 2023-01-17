@@ -1,0 +1,101 @@
+\begin{filecontents*}{\jobname.xmpdata}
+    \Title     {Atividade 10 - Animação de Tecidos}
+    \Author    {João Pedro Rosa Cezarino}
+    \Keywords  {CC6112\sep OpenGL\sep Cameras\sep FEI}
+    \Language  {pt-BR}
+    \Subject   {Resolução da Atividade 10 - Animação de Tecidos}
+\end{filecontents*}
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[bottom=3cm,top=2.5cm,left=2cm,right=2cm]{geometry}
+\usepackage[brazil]{babel}
+\usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\fancyhf{}
+\pagestyle{fancy}
+\fancyfoot[LE,RO]{\thepage}
+\setlength\headheight{26pt}
+\rhead{\includegraphics[width=4cm]{template-FEI/FEI_logo.png}}
+
+\begin{document}
+\noindent \textbf{Centro Universitário FEI}\\
+\noindent \textbf{CC6112 - Computação Gráfica}\\
+\noindent \textbf{Aluno: } João Pedro Rosa Cezarino  \\ 
+\noindent \textbf{R.A: } 22.120.021-5\\
+\today
+\\
+\begin{center}
+    \noindent \textbf{Resolução da Atividade 10 - Animação de Tecidos}
+\end{center}
+
+\vspace{0.5cm}
+\noindent\textbf{Questão 01:}
+
+Considere o modelo de animação de tecido dados em sala:
+
+\[m_ia_i + \sum\limits_{j=1}^{n} k \cdot d_i_j + \sum\limits_{j=1}^{n} F_at \cdot a_j - Fg = 0\]
+
+Descreva cada uma das variáveis físicas do modelo.\\
+\\
+\noindent\textbf{Solução:}
+\begin{enumerate}
+    \item $\mathbf{m_i} \rightarrow$  Massa das partículas;
+    \item $\mathbf{a_i} \rightarrow$  Aceleração resultante sobre a partícula;
+    \item $\mathbf{\sum\limits_{j=1}^{n} k \cdot d_i_j} \rightarrow$ Força elástica de Hook, onde \textbf{K} é a constante de Elasticidade;
+    \item $\mathbf{\sum\limits_{j=1}^{n} F_at \cdot a_j} \rightarrow$ Força de Atrito. Dependente da aceleração;
+    \item $\mathbf{Fg} \rightarrow$ Força Gravitacional.
+\end{enumerate}
+\vspace{0.5cm}
+
+\noindent\textbf{Questão 02:}
+
+A equação física para o modelo massa-mola é mostrada a seguir:
+
+\[m_ia_i + \sum\limits_{j=1}^{n} k \cdot d_i_j + \sum\limits_{j=1}^{n} F_at \cdot a_j - Fg = 0\]
+
+Onde o primeiro termo corresponde à força de aceleração de cada partícula, o segundo termo à força elástica, o terceiro termo à força de atrito com o ar e o quarto termo à força gravitacional. O algoritmo para a simulação desse modelo, considerando \emph{n} partículas com massa constante, contém vários passos. No entanto, alguns são imprescindíveis e também devem estar na ordem certa. A seguir são mostrados 13 comandos em pseudocódigo que podem ser utilizados para a implementação dessa simulação. Três desses comandos são desnecessários; os demais são mostrados em uma ordem que não está correta. Enumere na coluna da esquerda os 10 comandos, na ordem correta para que o algoritmo funcione.\\
+\newpage
+\noindent\textbf{Solução:}
+\begin{table}[h!]
+    \centering
+        \begin{tabular}{|| c | c ||}
+        \hline
+         7 & Calcular a posição da partícula \\ \hline
+         3 & Calcular a força de atrito \\ \hline
+         2 & Para Cada Partícula, faça \\ \hline
+         - & Calcular o Número de Partículas \\ \hline
+         9 & Renderizar a cena \\ \hline
+         8 & Fim Para \\ \hline
+         1 & Para cada instante de tempo \emph{t}, faça \\ \hline
+         6 & Calcular a Velocidade \\ \hline
+         4 & Calcular a Força de Elasticidade \\ \hline
+         - & Calcular a Massa de Cada Partícula \\ \hline
+         10 & Fim Para \\ \hline
+         5 & Calcular a Aceleração \\ \hline
+         - & Calcular o Choque entre as Partículas \\ \hline
+        \end{tabular}
+\end{table}
+\vspace{0.5cm}
+
+\noindent\textbf{Questão 03:}
+
+No caso de animação de tecidos, deve-se calcular diversas propriedades físicas. Considerando um algoritmo sequencial para os cálculos das propriedades \textbf{i) forças de elasticidade}; \textbf{ii) posição de cada partícula}; \textbf{iii) velocidade} e \textbf{iv) aceleração do tecido}, qual é a melhor ordem para o cálculo de \textbf{i} a \textbf{iv} de cada propriedade para realizar a animação adequada de cada partícula ?\\
+\\
+\noindent\textbf{Solução:}
+\begin{enumerate}
+    \item Cálculo da Força Elástica;
+    \item Cálculo da Acerelação do Tecido;
+    \item Cálculo da Velocidade;
+    \item Cálculo da Posição de cada partícula.
+\end{enumerate}
+\vspace{0.5cm}
+
+\noindent\textbf{Questão 04:}
+\begin{center}
+    \textbf{Implementação Prática em anexo junto à este documento.}
+\end{center}
+\end{document}
