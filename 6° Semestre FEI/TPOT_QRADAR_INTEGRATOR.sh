@@ -99,7 +99,7 @@ function edit_logstash_conf() {
   sudo docker exec -u 0 logstash cp /etc/logstash/logstash.conf /data/elk/logstash.conf
   stop_tpot
   echo -e "${RED}[!] T-POT Desligado [!]${NC}"
-  read -p "[+] Entre com o endereço IP do seu SIEM: [+]" answer
+  read -p "[+] Entre com o endereço IP do seu SIEM: " answer
   if [[ ! $answer =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 	echo "${RED}[!] Endereço IP inválido - Encerrando o script... [+]${NC}"
 	exit 0
@@ -125,7 +125,7 @@ sudo sed -i '/image: "dtagdevsec\/logstash:2204"/a\
     volumes:\
     - \/data:\/data\
     - \/data\/elk\/logstash.conf:\/etc\/logstash\/logstash.conf' /opt/tpot/etc/tpot.yml
-sudo awk '/- \/data\/elk\/logstash.conf:\/etc\/logstash\/logstash.conf/ {print; getline; getline; next} 1' /opt/tpot/etc/tpot.yml > /opt/tpot/etc/tpot_tmp.yml && mv /opt/tpot/etc/tpot_tmp.yml /opt/tpot/etc/tpot.yml
+sudo awk '/- \/data\/elk\/logstash.conf:\/etc\/logstash\/logstash.conf/ {print; getline; getline; next} 1' /opt/tpot/etc/tpot.yml > /opt/tpot/etc/tpot_tmp.yml && sudo mv /opt/tpot/etc/tpot_tmp.yml /opt/tpot/etc/tpot.yml
 }
 
 function reboot_server() {
