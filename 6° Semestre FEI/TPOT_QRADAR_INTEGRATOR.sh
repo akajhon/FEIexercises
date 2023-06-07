@@ -105,7 +105,7 @@ function edit_logstash_conf() {
 	exit 0
   else
     sudo sed -i 's/\#if \[type\] == \"Suricata\" {/syslog {\
-      host => \"\$answer\"\
+      host => \"$answer\"\
       port => \"514\"\
       protocol => \"tcp\"\
       codec => json\
